@@ -12,5 +12,6 @@ describe('CRUD movie', () => {
 
   it('should', () => {
     cy.log('say hello')
+    cy.log('sanity check')
   })
 })
