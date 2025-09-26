@@ -1,0 +1,12 @@
+@baseUrl = http://localhost:3001
+
+###
+# @name generateToken
+# simulate token generation (mocked
+GET {{baseUrl}}/auth/fake-token 
+
+###
+# @name hearbeat
+GET {{baseUrl}}
+
+
