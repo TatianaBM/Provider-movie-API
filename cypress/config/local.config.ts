@@ -9,7 +9,7 @@ require('dotenv').config({
   path: path.resolve(__dirname, '../../.env')
 })
 
-const serverPort = process.env.SERVERPORT || 3001
+const serverPort = process.env.PORT || 3001
 
 const config = {
   e2e: {
