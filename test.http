@@ -5,6 +5,7 @@
 # simulate token generation (mocked
 GET {{baseUrl}}/auth/fake-token 
 
+//health endpoint
 ###
 # @name hearbeat
 GET {{baseUrl}}
