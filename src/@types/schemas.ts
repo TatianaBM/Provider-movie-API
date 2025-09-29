@@ -98,27 +98,31 @@ export const GetMovieResponseUnionSchema = z
   })
   .openapi('GetMovieResponse')
 
-export const MovieNotFoundResponseSchema = z.object({
-  status: z.number().int().openapi({
-    example: 404,
-    description: 'Response status code '
-  }),
-  error: z.string().openapi({
-    example: 'Movie not found',
-    description: 'Error message '
+export const MovieNotFoundResponseSchema = z
+  .object({
+    status: z.number().int().openapi({
+      example: 404,
+      description: 'Response status code '
+    }),
+    error: z.string().openapi({
+      example: 'Movie not found',
+      description: 'Error message '
+    })
   })
-})
+  .openapi('MovieNotFound')
 
-export const DeleteMovieResponseSchema = z.object({
-  status: z.number().int().openapi({
-    example: 200,
-    description: 'Response status code '
-  }),
-  message: z.string().openapi({
-    example: 'Movie {id} has been deleted',
-    description: 'Success message for the deleted movie'
+export const DeleteMovieResponseSchema = z
+  .object({
+    status: z.number().int().openapi({
+      example: 200,
+      description: 'Response status code '
+    }),
+    message: z.string().openapi({
+      example: 'Movie {id} has been deleted',
+      description: 'Success message for the deleted movie'
+    })
   })
-})
+  .openapi('DeleteMovieResponse')
 
 export const UpdateMovieSchema = z
   .object({

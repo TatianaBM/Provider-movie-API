@@ -20,7 +20,8 @@
     "db:sync": "npx prisma db push --force-reset && npx prisma generate",
     "reset:db": "tsx ./scripts/global-setup.ts",
     "start": ". ./scripts/env-setup.sh && npx prisma generate && npm run db:sync && npm run reset:db && nodemon",
-    "prestart": "npx prisma generate"
+    "prestart": "npx prisma generate",
+    "generate:openapi": "tsx src/api-docs/openapi-writer.ts"
   },
   "devDependencies": {
     "@bahmutov/cy-api": "2.2.8",
