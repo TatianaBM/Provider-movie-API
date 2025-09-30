@@ -21,7 +21,9 @@
     "reset:db": "tsx ./scripts/global-setup.ts",
     "start": ". ./scripts/env-setup.sh && npx prisma generate && npm run db:sync && npm run reset:db && nodemon",
     "prestart": "npx prisma generate",
-    "generate:openapi": "tsx src/api-docs/openapi-writer.ts"
+    "generate:openapi": "tsx src/api-docs/openapi-writer.ts",
+    "optic:lint": "optic lint src/api-docs/openapi.yml",
+    "optic:diff": "optic diff src/api-docs/openapi.yml --check --web --base main "
   },
   "devDependencies": {
     "@bahmutov/cy-api": "2.2.8",
@@ -38,6 +40,7 @@
     "@types/node": "22.18.6",
     "@typescript-eslint/eslint-plugin": "8.44.0",
     "@typescript-eslint/parser": "8.44.0",
+    "@useoptic/optic": "^1.0.9",
     "cy-retryable-before": "1.0.2",
     "cy-spok": "1.6.3",
     "cypress": "15.2.0",
