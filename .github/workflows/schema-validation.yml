@@ -34,7 +34,7 @@ jobs:
       #if OpenAPI Docs have changed, it commits and pushed those changes back to the pr branch  
       - name: Check if your OpenApi Docs have changed
         run: |
-          if git diff --quiet src/api-docs/openapi.yml src/api-docs/openapi.json then
+          if git diff --quiet src/api-docs/openapi.yml src/api-docs/openapi.json; then
             echo "changes=false" >> $GITHUB_ENV
           else
             echo "changes=true" >> $GITHUB_ENV 
