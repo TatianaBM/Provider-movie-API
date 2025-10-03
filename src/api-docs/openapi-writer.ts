@@ -4,17 +4,17 @@ import { stringify } from 'yaml'
 import { openApiDoc } from './openapi-generator'
 
 // generate openApi docs with zod
-// two versions json and yaml
+// two versions json and yml
 
-//YAML format
-// convert OpenApi to yaml
-const yamlDoc = stringify(openApiDoc)
+//yml format
+// convert OpenApi to yml
+const ymlDoc = stringify(openApiDoc)
 
 const scriptDir = path.resolve(__dirname)
 
-//write yaml file
-fs.writeFileSync(`${scriptDir}/openapi.yaml`, yamlDoc)
-console.log('OpenApi generated in YAML format')
+//write yml file
+fs.writeFileSync(`${scriptDir}/openapi.yml`, ymlDoc)
+console.log('OpenApi generated in yml format')
 
 //json format
 const jsonDoc = JSON.stringify(openApiDoc, null, 2)

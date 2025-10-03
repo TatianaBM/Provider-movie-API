@@ -1,0 +1,70 @@
+name: Run schema validation
+on:
+  pull_request:
+  workflow_dispatch:
+
+#  if this branch runs back to back i cancel the old workflow  
+concurrency:
+  group: ${{ github.ref}} && ${{ github.workflow }}     
+  cancel-in-progress: true
+
+jobs: 
+  schema-validation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+      - name: Read Node version from .nvmrc
+        id: node_version
+        run: echo "NODE_VERSION=$(cat .nvmrc)" >> $GITHUB_ENV
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: ${{ env.NODE_VERSION }}  
+            
+      - name: Install dependencies    
+        run: npm ci
+      
+      # if OpenAPI Docs have changed, it commits and pushed those changes back to the pr branch 
+      # generate new OpenApi documentation
+      - name: generate OpenAPI Docs from code
+        run: npm run generate:openapi
+      
+      #if OpenAPI Docs have changed, it commits and pushed those changes back to the pr branch  
+      - name: Check if your OpenApi Docs have changed
+        run: |
+          if git diff --quiet src/api-docs/openapi.yml src/api-docs/openapi.json; then
+            echo "changes=false" >> $GITHUB_ENV
+          else
+            echo "changes=true" >> $GITHUB_ENV 
+          fi  
+
+      - name: Commit and push OpenAPI changes
+        if: env.changes == 'true' 
+        uses: EndBug/add-and-commit@v9
+        with:
+          author_name: 'Github-Actions'
+          author_email: 'actions@github.com'
+          message: 'Update OpenAPI docs'
+          add: 'src/api-docs/openapi.yml, src/api-docs/openapi.json'
+          push: true
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      # need to take a look does not really work
+      - name: Create empty commit to re-run checks
+        if: env.changes == 'true'
+        run: |
+          git config --local user.email 'actions@github.com'
+          git config --local user.name 'Github-Actions'
+          git commit --allow-empty -m "Re-run checks after OpenApi update"  
+          git push origin HEAD:${{ github.head_ref }}
+      
+      # to compare again the main branch
+      - name: Fetch main branch for Optic   
+        run: git fetch --depth=1 origin main:main
+      
+      - name: Optic diff 
+        run: npm run optic:diff 
+      
+        
