@@ -1,4 +1,3 @@
-# to make sure all CI checks have passed before approving the merge
 name: Merge Gatekeeper
 
 on:
