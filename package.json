@@ -31,7 +31,7 @@
     "@cypress/skip-test": "2.6.1",
     "@esbuild-plugins/node-globals-polyfill": "0.2.3",
     "@esbuild-plugins/node-modules-polyfill": "0.2.2",
-    "@faker-js/faker": "10.0.0",
+    "@faker-js/faker": "^8.4.1",
     "@mockoon/cli": "9.3.0",
     "@types/cors": "2.8.17",
     "@types/express": "4.17.13",
