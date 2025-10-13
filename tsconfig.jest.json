@@ -2,7 +2,7 @@
   "extends": "./tsconfig.json",
   "exclude": ["**/cypress.d.ts", "**/cypress", "**/*.cy.ts*"],
   "compilerOptions": {
-    "types": ["@types/jest", "node"]
+    "types": ["@types/jest"]
   },
   "include": ["**/*.test.ts*", "**/*.pacttest.ts*"]
 }
