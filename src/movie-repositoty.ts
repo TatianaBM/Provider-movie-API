@@ -10,7 +10,7 @@ import type {
 } from './@types'
 
 // MovieRepository: this is the interface/contract that defined the methods
-//for interacting with the datat layer
+//for interacting with the data layer
 
 export interface MovieRepository {
   getMovies(): Promise<GetMovieResponse>
